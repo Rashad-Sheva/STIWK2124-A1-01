@@ -1,4 +1,0 @@
-@GetMapping
-public List<Book> getAllBooks() {
-    return bookService.getAllBooks();
-}
