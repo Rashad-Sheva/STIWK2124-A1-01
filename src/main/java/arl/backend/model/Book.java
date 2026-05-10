@@ -1,29 +1,31 @@
 package arl.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Task Person 4: Validation
-    @NotBlank(message = "Tajuk buku tak boleh kosong!")
+    @NotBlank(message = "Title is required")
+    @Column(nullable = false)
     private String title;
 
-    @NotBlank(message = "Nama penulis kena ada!")
+    @NotBlank(message = "Author is required")
+    @Column(nullable = false)
     private String author;
 
-    // Constructor kosong (Wajib ada untuk JPA)
-    public Book() {}
+    private String category;
 
-    // Getter dan Setter
+    @Size(max = 500, message = "Description cannot exceed 500 characters")
+    private String description;
+
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -32,4 +34,10 @@ public class Book {
 
     public String getAuthor() { return author; }
     public void setAuthor(String author) { this.author = author; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
